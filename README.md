@@ -1,5 +1,10 @@
 # Terraform Module: terraform-aws-remote-state
 
+It's Orianted from https://github.com/bincyber/terraform-aws-remote-state
+
+But I added this output can make backend config tf file.
+Also, I added new name prefix and project name and assign them into resources by using local directive.
+
 This Terraform module provisions a S3 bucket for remote state storage and a DynamoDB table for state locking.
 
 The S3 bucket is created with versioning, server-side encryption, and logging enabled. A custom KMS encryption key is created for use with the S3 bucket. Bucket access logs are sent to a seperate S3 bucket.
@@ -22,7 +27,7 @@ Terraform version 0.11.0 or newer is required.
 Use the module in Terraform code:
 
     module "remote_state_setup" {
-      source = "git::https://github.com/bincyber/terraform-aws-remote-state"
+      source = "git::https://github.com/glayneon/terraform-aws-remote-state"
 
       aws_region          = "us-east-1"
       aws_environment     = "Prod"

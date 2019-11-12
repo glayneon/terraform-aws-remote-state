@@ -1,39 +1,49 @@
 # Variables
+# Author: Chase, Kim in PCT Team
 # https://www.terraform.io/intro/getting-started/variables.html
 # https://www.terraform.io/docs/configuration/variables.html
 
 variable "aws_region" {
   description = "the AWS region"
+  default     = "ap-northeast-2"
+}
+
+variable "name_project" {
+  description = "the name for this project"
+  default     = "remote-state"
 }
 
 variable "aws_environment" {
   description = "the AWS environment"
+  default     = "test"
 }
 
-variable "s3_bucket_name" {
-  description = "the name of the S3 bucket which will be used to store state files"
+variable "name_prefix" {
+  description = "the name prefix for AIOps"
+  default     = "aiops-"
 }
 
-variable "dynamodb_table_name" {
-  description = "the name of the DynamoDB table which will be used for state locking"
+variable "name_owner" {
+  description = "The name for owner or team."
+  default     = "chase-"
 }
 
 variable "dynamodb_read_capacity_units" {
   description = "the amount of read capacity units for the DynamoDB table"
-  default     = 5
+  default     = 10
 }
 
 variable "dynamodb_write_capacity_units" {
   description = "the amount of write capacity units for the DynamoDB table"
-  default     = 1
+  default     = 3
 }
 
-variable "iam_group_name_rw_access" {
-  description = "the name of the IAM group that will have read-write access"
-  default     = "terraform_rw_access"
-}
+# It's local values
 
-variable "iam_group_name_ro_access" {
-  description = "the name of the IAM group that will have read-only access"
-  default     = "terraform_ro_access"
+locals {
+  full_name                = "${var.name_prefix}${var.name_owner}${var.name_project}"
+  s3_bucket_name           = "${local.full_name}"
+  dynamodb_table_name      = "${local.full_name}"
+  iam_group_name_rw_access = "${local.full_name}_rw_access"
+  iam_group_name_ro_access = "${local.full_name}_ro_access"
 }

@@ -16,7 +16,7 @@ data "aws_iam_policy_document" "s3_bucket_rw_access" {
     ]
 
     resources = [
-      "arn:aws:s3:::${var.s3_bucket_name}",
+      "arn:aws:s3:::${local.s3_bucket_name}",
     ]
   }
 
@@ -30,7 +30,7 @@ data "aws_iam_policy_document" "s3_bucket_rw_access" {
     ]
 
     resources = [
-      "arn:aws:s3:::${var.s3_bucket_name}/*",
+      "arn:aws:s3:::${local.s3_bucket_name}/*",
     ]
   }
 
@@ -63,7 +63,7 @@ data "aws_iam_policy_document" "s3_bucket_ro_access" {
     ]
 
     resources = [
-      "arn:aws:s3:::${var.s3_bucket_name}",
+      "arn:aws:s3:::${local.s3_bucket_name}",
     ]
   }
 
@@ -76,7 +76,7 @@ data "aws_iam_policy_document" "s3_bucket_ro_access" {
     ]
 
     resources = [
-      "arn:aws:s3:::${var.s3_bucket_name}/*",
+      "arn:aws:s3:::${local.s3_bucket_name}/*",
     ]
   }
 
@@ -129,7 +129,7 @@ data "aws_iam_policy_document" "dynamodb_table" {
     ]
 
     resources = [
-      "arn:aws:dynamodb:${var.aws_region}:${data.aws_caller_identity.current.account_id}:table/${var.dynamodb_table_name}",
+      "arn:aws:dynamodb:${var.aws_region}:${data.aws_caller_identity.current.account_id}:table/${local.dynamodb_table_name}",
     ]
   }
 }

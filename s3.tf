@@ -2,13 +2,13 @@
 # https://www.terraform.io/docs/providers/aws/r/s3_bucket.html
 
 resource "aws_s3_bucket" "logs_bucket" {
-  bucket        = "${var.s3_bucket_name}-logs"
+  bucket        = "${local.s3_bucket_name}-logs"
   acl           = "log-delivery-write"
   force_destroy = true
 }
 
 resource "aws_s3_bucket" "remote_state_bucket" {
-  bucket = "${var.s3_bucket_name}"
+  bucket = "${local.s3_bucket_name}"
   acl    = "private"
 
   /*
@@ -36,7 +36,7 @@ resource "aws_s3_bucket" "remote_state_bucket" {
     target_prefix = "logs/"
   }
 
-  tags {
+  tags = {
     Name      = "Terraform Remote State bucket"
     Env       = "${var.aws_environment}"
     Comment   = "used to store Terraform state files"

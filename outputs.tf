@@ -1,6 +1,26 @@
 # Outputs
 # https://www.terraform.io/docs/configuration/outputs.html
 
+locals {
+  config_backend_s3 = <<CONFIGBACKENDS3
+
+
+terraform {
+  backend "s3" {
+  encrypt = true
+  bucket = "${aws_s3_bucket.remote_state_bucket.id}"
+  dynamodb_table = "${aws_dynamodb_table.state_locking_table.id}"
+  key = "${var.name_prefix}${var.name_owner}state"
+  region = "${var.aws_region}"
+
+  }
+  required_providers {
+    aws = ">= 2.32.0"
+  }
+}
+CONFIGBACKENDS3
+}
+
 output "region" {
   value = "${var.aws_region}"
 }
@@ -51,4 +71,8 @@ output "iam_group_terraform_ro_access_name" {
 
 output "iam_group_terraform_ro_access_arn" {
   value = "${aws_iam_group.terraform_ro_access.arn}"
+}
+
+output "config_backend_s3" {
+  value = "${local.config_backend_s3}"
 }
