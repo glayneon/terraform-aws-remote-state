@@ -10,7 +10,7 @@ terraform {
   encrypt = true
   bucket = "${aws_s3_bucket.remote_state_bucket.id}"
   dynamodb_table = "${aws_dynamodb_table.state_locking_table.id}"
-  key = "${var.name_prefix}${var.name_owner}state"
+  key = "${local.prefix_name}-state"
   region = "${var.aws_region}"
 
   }

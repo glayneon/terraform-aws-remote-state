@@ -20,12 +20,12 @@ variable "aws_environment" {
 
 variable "name_prefix" {
   description = "the name prefix for AIOps"
-  default     = "aiops-"
+  default     = "aiops"
 }
 
 variable "name_owner" {
   description = "The name for owner or team."
-  default     = "chase-"
+  default     = "chase"
 }
 
 variable "dynamodb_read_capacity_units" {
@@ -41,7 +41,8 @@ variable "dynamodb_write_capacity_units" {
 # It's local values
 
 locals {
-  full_name                = "${var.name_prefix}${var.name_owner}${var.name_project}"
+  full_name                = "${var.name_prefix}-${var.name_owner}-${var.name_project}"
+  prefix_name = "${var.name_prefix}-${var.name_owner}"
   s3_bucket_name           = "${local.full_name}"
   dynamodb_table_name      = "${local.full_name}"
   iam_group_name_rw_access = "${local.full_name}_rw_access"
