@@ -42,7 +42,7 @@ variable "dynamodb_write_capacity_units" {
 
 locals {
   full_name                = "${var.name_prefix}-${var.name_owner}-${var.name_project}"
-  prefix_name = "${var.name_prefix}-${var.name_owner}"
+  prefix_name              = "${var.name_prefix}-${var.name_owner}"
   s3_bucket_name           = "${local.full_name}"
   dynamodb_table_name      = "${local.full_name}"
   iam_group_name_rw_access = "${local.full_name}_rw_access"
