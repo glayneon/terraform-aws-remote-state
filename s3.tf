@@ -16,10 +16,14 @@ resource "aws_s3_bucket" "remote_state_bucket" {
     Currently Terraform will not force destroy a bucket if it contains versioned files.
     All versions will have to be deleted manually first (ie. empty the bucket).
   */
-  force_destroy = false
+  force_destroy = true
 
   versioning {
     enabled = true
+  }
+
+  lifecycle {
+    prevent_destroy = false
   }
 
   server_side_encryption_configuration {

@@ -10,3 +10,17 @@ terraform {
 provider "aws" {
   region = "${var.aws_region}"
 }
+
+terraform {
+  backend "s3" {
+  encrypt = true
+  bucket = "aiops-remote-state-chase"
+  dynamodb_table = "aiops-remote-state-chase"
+  key = "test/remote-state/remote-state-state"
+  region = "ap-northeast-2"
+
+  }
+  required_providers {
+    aws = ">= 2.32.0"
+  }
+}
