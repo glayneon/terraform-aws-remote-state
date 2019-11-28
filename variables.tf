@@ -18,11 +18,6 @@ variable "aws_environment" {
   default     = "test"
 }
 
-variable "this_name" {
-  description = "The module name for this."
-  default = "remote-state"
-}
-
 variable "name_prefix" {
   description = "the name prefix for AIOps"
   default     = "aiops"
@@ -46,11 +41,10 @@ variable "dynamodb_write_capacity_units" {
 # It's local values
 
 locals {
-  full_name                = "${var.name_prefix}-${var.name_owner}-${var.name_project}"
+  s3_bucket_name           = "${var.name_prefix}-${var.name_project}-${var.name_owner}"
   prefix_name              = "${var.name_prefix}-${var.name_owner}"
-  s3_bucket_name           = "${local.full_name}"
-  dynamodb_table_name      = "${local.full_name}"
-  iam_group_name_rw_access = "${local.full_name}_rw_access"
-  iam_group_name_ro_access = "${local.full_name}_ro_access"
+  state_file_name = "${var.aws_environment}/${var.name_project}/${var.name_project}-state"
+  dynamodb_table_name      = "${local.s3_bucket_name}"
+  iam_group_name_rw_access = "${local.s3_bucket_name}_rw_access"
+  iam_group_name_ro_access = "${local.s3_bucket_name}_ro_access"
 }
-

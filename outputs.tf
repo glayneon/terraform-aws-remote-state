@@ -4,13 +4,12 @@
 locals {
   config_backend_s3 = <<CONFIGBACKENDS3
 
-
 terraform {
   backend "s3" {
   encrypt = true
   bucket = "${aws_s3_bucket.remote_state_bucket.id}"
   dynamodb_table = "${aws_dynamodb_table.state_locking_table.id}"
-  key = "${local.prefix_name}-state"
+  key = "${local.state_file_name}"
   region = "${var.aws_region}"
 
   }
@@ -75,4 +74,8 @@ output "iam_group_terraform_ro_access_arn" {
 
 output "config_backend_s3" {
   value = "${local.config_backend_s3}"
+}
+
+output "state_file" {
+  value = "${local.state_file_name}"
 }
