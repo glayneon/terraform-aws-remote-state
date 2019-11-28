@@ -48,3 +48,4 @@ locals {
   iam_group_name_rw_access = "${local.full_name}_rw_access"
   iam_group_name_ro_access = "${local.full_name}_ro_access"
 }
+
