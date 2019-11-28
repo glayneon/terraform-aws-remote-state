@@ -18,6 +18,11 @@ variable "aws_environment" {
   default     = "test"
 }
 
+variable "this_name" {
+  description = "The module name for this."
+  default = "remote-state"
+}
+
 variable "name_prefix" {
   description = "the name prefix for AIOps"
   default     = "aiops"

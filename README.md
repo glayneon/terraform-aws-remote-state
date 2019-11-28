@@ -1,9 +1,9 @@
-# Terraform Module: terraform-aws-remote-state
+# Terraform Module: tf-aws-remote-state
 
 It's orianted from https://github.com/bincyber/terraform-aws-remote-state
 
-But I added this output can make backend config tf file.
-Also, I added new name prefix and project name and assign them into resources by using local directive.
+And I added this output can make backend config tf file for itself.
+Additionaly, I added new name prefix and project name and assign them into resources by using local directive.
 
 Thanks, bincyber :)
 
